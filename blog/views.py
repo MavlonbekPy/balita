@@ -1,13 +1,30 @@
 from django.shortcuts import render
 from .models import Post, Category, Tag
+from django.core.paginator import Paginator
+
+
+def base_view(request):
+    categories = Category.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'layouts/base.html', context=context)
 
 
 def home_view(request):
-    posts = Post.objects.filter(is_published=True)
+    info = request.GET
+    cat = info.get('cat')
+    page = info.get("page", 1)
+    if info.get('cat'):
+        posts = Post.objects.filter(is_published=True, category_id=cat)
+    else:
+        posts = Post.objects.filter(is_published=True)
+    post_obj = Paginator(posts, 2)
+    # posts = Post.objects.filter(is_published=True)
     categories = Category.objects.all()
     tags = Tag.objects.all()
     context = {
-        'posts': posts,
+        'posts': post_obj.page(page),
         'categories': categories,
         'tags': tags
     }
@@ -15,7 +32,7 @@ def home_view(request):
 
 
 def about_view(request):
-    posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.filter(is_published=True).order_by('-created_at')
     context = {
         'posts': posts
     }
@@ -39,4 +56,10 @@ def contact_view(request):
 
 
 def blog_single(request):
-    return render(request, 'blog-single.html')
+    posts = Post.objects.filter(is_published=True)
+    tags = Tag.objects.all()
+    d = {
+        'posts': posts,
+        'tags': tags
+    }
+    return render(request, 'blog-single.html', context=d)
