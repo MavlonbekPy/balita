@@ -109,110 +109,21 @@
             <div class="row blog-entries">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="row">
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_5.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Food</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {% for post in posts|slice:':4' %}
+                            <div class="col-md-6">
+                                <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                                    <img src="{{ post.image.url }}" alt="Image placeholder">
+                                    <div class="blog-content-body">
+                                        <div class="post-meta">
+                                            <span class="category">{{ post.category.name }}</span>
+                                            <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                        </div>
+                                        <h2>{{ post.description }}</h2>
                                     </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_6.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Travel</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_7.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Travel, Asia</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_8.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Travel</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_9.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Travel</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_10.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Lifestyle</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_11.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Lifestyle</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="/blog-single/" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                                <img src="{% static 'images/img_12.jpg' %}" alt="Image placeholder">
-                                <div class="blog-content-body">
-                                    <div class="post-meta">
-                                        <span class="category">Food</span>
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -232,51 +143,22 @@
                             <h2 class="mb-4">More Blog Posts</h2>
                         </div>
                         <div class="col-md-12">
-                            <div class="post-entry-horzontal">
-                                <a href="/blog-single/">
-                                    <div class="image element-animate" data-animate-effect="fadeIn"
-                                         style="background-image: url({% static 'images/img_10.jpg' %});"></div>
-                                    <span class="text">
-<div class="post-meta">
-<span class="category">Travel</span>
-<span class="mr-2">March 15, 2018 </span> &bullet;
-<span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-</div>
-<h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-</span>
-                                </a>
-                            </div>
-
-                            <div class="post-entry-horzontal">
-                                <a href="/blog-single/">
-                                    <div class="image element-animate" data-animate-effect="fadeIn"
-                                         style="background-image: url({% static 'images/img_11.jpg' %});"></div>
-                                    <span class="text">
-<div class="post-meta">
-<span class="category">Lifestyle</span>
-<span class="mr-2">March 15, 2018 </span> &bullet;
-<span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-</div>
-<h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-</span>
-                                </a>
-                            </div>
-
-                            <div class="post-entry-horzontal">
-                                <a href="/blog-single/">
-                                    <div class="image element-animate" data-animate-effect="fadeIn"
-                                         style="background-image: url({% static 'images/img_12.jpg' %});"></div>
-                                    <span class="text">
-<div class="post-meta">
-<span class="category">Food</span>
-<span class="mr-2">March 15, 2018 </span> &bullet;
-<span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-</div>
-<h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-</span>
-                                </a>
-                            </div>
-
+                            {% for post in posts|slice:"4:" %}
+                                <div class="post-entry-horzontal">
+                                    <a href="/blog_single/">
+                                        <div class="image element-animate" data-animate-effect="fadeIn"
+                                             style="background-image: url({{ post.image.url }});"></div>
+                                        <span class="text">
+                                        <div class="post-meta">
+                                            <span class="category">Travel</span>
+                                            <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                        </div>
+                                        <h2>{{ post.description }}</h2>
+                                    </span>
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -360,29 +242,18 @@
                     <div class="sidebar-box">
                         <h3 class="heading">Categories</h3>
                         <ul class="categories">
-                            <li><a href="#">Courses <span>(12)</span></a></li>
-                            <li><a href="#">News <span>(22)</span></a></li>
-                            <li><a href="#">Design <span>(37)</span></a></li>
-                            <li><a href="#">HTML <span>(42)</span></a></li>
-                            <li><a href="#">Web Development <span>(14)</span></a></li>
+                            {% for category in categories %}
+                                <li><a href="#">{{ category.name }}<span>{{ category.id }}</span></a></li>
+                            {% endfor %}
                         </ul>
                     </div>
 
                     <div class="sidebar-box">
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
+                            {% for tag in tags %}
+                                <li><a href="#">{{ tag.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
