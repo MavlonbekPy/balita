@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Post, Category, Tag
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Post, Category, Tag, Comment
 from django.core.paginator import Paginator
 
 
@@ -33,33 +33,55 @@ def home_view(request):
 
 def about_view(request):
     posts = Post.objects.filter(is_published=True).order_by('-created_at')
+    categories = Category.objects.all()
     context = {
+        'categories': categories,
         'posts': posts
     }
     return render(request, 'about.html', context=context)
 
 
 def blog_view(request):
-    return render(request, 'blog.html')
+    categories = Category.objects.all()
+
+    return render(request, 'blog.html', context={'categories': categories})
 
 
 def category_view(request):
-    posts = Post.objects.filter(is_published=True)
+    cate = request.GET.get('category')
+    posts = Post.objects.filter(is_published=True, category__name=cate)
+    categories = Category.objects.all()
     context = {
-        'posts': posts
+        'posts': posts,
+        'categories': categories
     }
     return render(request, 'category.html', context=context)
 
 
 def contact_view(request):
-    return render(request, 'contact.html')
+    categories = Category.objects.all()
+    return render(request, 'contact.html', context={'categories': categories})
 
 
-def blog_single(request):
-    posts = Post.objects.filter(is_published=True)
+def blog_single(request, pk):
+    if request.method == 'POST':
+        print(request.POST)
+        comment = Comment.objects.create(post_id=pk, message=request.POST['message'], email=request.POST['email'],
+
+                                         name=request.POST['name'])
+        comment.save()
+        return redirect(f'/blog/{pk}/')
+
+    # posts = Post.objects.filter(is_published=True, pk=pk)
+    posts = get_object_or_404(Post, pk=pk)
+    comments = Comment.objects.filter(post_id=pk)
+
+    categories = Category.objects.all()
     tags = Tag.objects.all()
     d = {
         'posts': posts,
-        'tags': tags
+        'tags': tags,
+        'categories': categories,
+        'comments': comments
     }
     return render(request, 'blog-single.html', context=d)

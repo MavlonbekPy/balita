@@ -7,4 +7,5 @@ urlpatterns = [
     path('category/', category_view),
     path('contact/', contact_view),
     path('about/', about_view),
+    path('blog/<int:pk>/', blog_single)
 ]
