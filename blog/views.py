@@ -11,15 +11,17 @@ def base_view(request):
     return render(request, 'layouts/base.html', context=context)
 
 
+def blog_search_view(request):
+    text = request.GET.get('text')
+    text = text.replace('+', ' ')
+    posts = Post.objects.filter(title__contains=text)
+
+
 def home_view(request):
     info = request.GET
-    cat = info.get('cat')
     page = info.get("page", 1)
-    if info.get('cat'):
-        posts = Post.objects.filter(is_published=True, category_id=cat)
-    else:
-        posts = Post.objects.filter(is_published=True)
-    post_obj = Paginator(posts, 2)
+    posts = Post.objects.filter(is_published=True)
+    post_obj = Paginator(posts, 3)
     # posts = Post.objects.filter(is_published=True)
     categories = Category.objects.all()
     tags = Tag.objects.all()
