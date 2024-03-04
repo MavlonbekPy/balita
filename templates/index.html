@@ -14,8 +14,8 @@
                                     <div class=" text half-to-full">
                                         <div class="post-meta">
                                             <span class="category">{{ post.category.name }}</span>
-                                            <span class="mr-2">{{ post.created_at }}</span> &bullet
-                                            <span class="ml-2"><span class="fa fa-comments"></span></span>
+                                            <span class="mr-2">{{ post.created_at }} </span>&bullet;
+                                            <span class="ml-2"><span class="fa fa-comments"></span>3</span>
                                         </div>
                                         <h3>{{ post.title }}</h3>
                                         <p>{{ post.description|truncatechars:100 }}</p>
@@ -33,10 +33,10 @@
                                 <div class=" text">
                                     <div class="post-meta">
                                         <span class="category">{{ post.category.name }}</span>
-                                        <span class="mr-2">{{ post.created_at }}</span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span>3</span>
+                                        <span class="mr-2">{{ post.created_at }} </span> &bullet;
+                                        <span class="ml-2"><span class="fa fa-comments">3</span>{{ comment.id }}</span>
                                     </div>
-                                    <h3>{{ post.description|truncatechars:50 }}</h3>
+                                    <h3>{{ post.description|truncatechars:40 }}</h3>
                                 </div>
                             </a>
                         </div>
@@ -107,11 +107,9 @@
                     <div class="row mb-5 mt-5">
                         <div class="col-md-12">
                             <h2 class="mb-4">More Blog Posts</h2>
-                        </div>
-                        <div class="col-md-12">
-                            {% for post in posts|slice:"4:" %}
+                            {% for post in posts %}
                                 <div class="post-entry-horzontal">
-                                    <a href="/blog_single/">
+                                    <a href="/blog/{{ post.id }}/">
                                         <div class="image element-animate" data-animate-effect="fadeIn"
                                              style="background-image: url({{ post.image.url }});"></div>
                                         <span class="text">
@@ -149,7 +147,7 @@
                                     repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit
                                     molestias
                                     minus.</p>
-                                <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
+                                <p><a href="/about/" class="btn btn-primary btn-sm">Read my bio</a></p>
                                 <p class="social">
                                     <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
                                     <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
@@ -162,63 +160,41 @@
 
                     <div class="sidebar-box">
                         <h3 class="heading">Popular Posts</h3>
-                        <div class="post-entry-sidebar">
-                            <ul>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_2.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {% for post in posts %}
+                            <div class="post-entry-sidebar">
+                                <ul>
+                                    <li>
+                                        <a href="/blog/{{ post.id }}/">
+                                            <img src="{{ post.image.url }}" alt="Image placeholder"
+                                                 class="mr-4">
+                                            <div class="text">
+                                                <h4>{{ post.description|truncatechars:40 }}</h4>
+                                                <div class="post-meta">
+                                                    <span class="mr-2">{{ post.created_at }} </span> &bullet;
+                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_4.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_12.jpg' %}" alt="Image placeholder"
-                                             class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
                     </div>
-
-                    <div class="sidebar-box">
-                        <h3 class="heading">Categories</h3>
-                        <ul class="categories">
+                    <h3 class="heading">Categories</h3>
+                    <ul class="categories">
+                        <div class="sidebar-box">
                             {% for category in categories %}
-                                <li><a href="#">{{ category.name }}<span>{{ category.id }}</span></a></li>
+                                <li>
+                                    <a href="/category/?category={{ category }}">{{ category.name }}<span>{{ category.id }}</span></a>
+                                </li>
                             {% endfor %}
-                        </ul>
-                    </div>
-
+                        </div>
+                    </ul>
                     <div class="sidebar-box">
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
                             {% for tag in tags %}
-                                <li><a href="/blog/{{ post.id }}/">{{ tag.name }}</a></li>
+                                <li><a href="/blog/{{ tag.id }}/">{{ tag.name }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -100,80 +100,49 @@
 
                     <div class="sidebar-box">
                         <h3 class="heading">Popular Posts</h3>
-                        <div class="post-entry-sidebar">
-                            <ul>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_2.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {% for post in posts|slice:":3" %}
+                            <div class="post-entry-sidebar">
+                                <ul>
+                                    <li>
+                                        <a href>
+                                            <img src="{{ post.image.url }}" alt="Image placeholder"
+                                                 class="mr-4">
+                                            <div class="text">
+                                                <h4>{{ post.description|truncatechars:40 }}</h4>
+                                                <div class="post-meta">
+                                                    <span class="mr-2">{{ post.created_at }} </span> &bullet;
+                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <h3 class="heading">Categories</h3>
+                    <ul class="categories">
+                        <div class="sidebar-box">
+                            {% for category in categories %}
                                 <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_4.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    <a href="/category/?category={{ category }}">{{ category.name }}<span>{{ category.id }}</span></a>
                                 </li>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_12.jpg' %}" alt="Image placeholder"
-                                             class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                            {% endfor %}
                         </div>
-                    </div>
-
-                    <div class="sidebar-box">
-                        <h3 class="heading">Categories</h3>
-                        <ul class="categories">
-                            <li><a href="#">Courses <span>(12)</span></a></li>
-                            <li><a href="#">News <span>(22)</span></a></li>
-                            <li><a href="#">Design <span>(37)</span></a></li>
-                            <li><a href="#">HTML <span>(42)</span></a></li>
-                            <li><a href="#">Web Development <span>(14)</span></a></li>
-                        </ul>
-                    </div>
-
+                    </ul>
                     <div class="sidebar-box">
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
+                            {% for tag in tags %}
+                                <li><a href="/blog/{{ tag.id }}/">{{ tag.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
-
             </div>
+
+        </div>
         </div>
     </section>
 {% endblock %}

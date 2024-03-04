@@ -20,7 +20,7 @@ def blog_search_view(request):
 def home_view(request):
     info = request.GET
     page = info.get("page", 1)
-    posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.filter(is_published=True).order_by('-created_at')
     post_obj = Paginator(posts, 3)
     # posts = Post.objects.filter(is_published=True)
     categories = Category.objects.all()
@@ -33,31 +33,40 @@ def home_view(request):
     return render(request, 'index.html', context=context)
 
 
+def category_view(request):
+    info = request.GET
+    page = info.get("page", 1)
+    cate = request.GET.get('category')
+    posts = Post.objects.filter(is_published=True, category__name=cate).order_by('-created_at')
+    posts_obj = Paginator(posts, 2)
+    tags = Tag.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'posts': posts_obj.page(page),
+        'categories': categories,
+        'tag': tags
+    }
+    return render(request, 'category.html', context=context)
+
+
 def about_view(request):
+    tags = Tag.objects.all()
     posts = Post.objects.filter(is_published=True).order_by('-created_at')
     categories = Category.objects.all()
     context = {
         'categories': categories,
-        'posts': posts
+        'posts': posts,
+        'tags': tags,
     }
     return render(request, 'about.html', context=context)
 
 
 def blog_view(request):
     categories = Category.objects.all()
-
-    return render(request, 'blog.html', context={'categories': categories})
-
-
-def category_view(request):
-    cate = request.GET.get('category')
-    posts = Post.objects.filter(is_published=True, category__name=cate)
-    categories = Category.objects.all()
     context = {
-        'posts': posts,
         'categories': categories
     }
-    return render(request, 'category.html', context=context)
+    return render(request, 'blog.html', context=context)
 
 
 def contact_view(request):

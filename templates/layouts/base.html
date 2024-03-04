@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-3 search-top">
 
-                    <form action="#" class="search-top-form">
+                    <form action="/search/" class="search-top-form">
                         <span class="icon fa fa-search"></span>
                         <input type="text" id="s" placeholder="Type keyword to search...">
                     </form>
@@ -108,23 +108,24 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="/">Home</a>
                     </li>
-{#                    <li class="nav-item dropdown">#}
-{#                        <a class="nav-link dropdown-toggle" href="/category/" id="dropdown04" data-toggle="dropdown"#}
-{#                           aria-haspopup="true" aria-expanded="false">Travel</a>#}
-{#                        <div class="dropdown-menu" aria-labelledby="dropdown04">#}
-{#                            <a class="dropdown-item" href="/category/">Asia</a>#}
-{#                            <a class="dropdown-item" href="/category/">Europe</a>#}
-{#                            <a class="dropdown-item" href="/category/">Dubai</a>#}
-{#                            <a class="dropdown-item" href="/category/">Africa</a>#}
-{#                            <a class="dropdown-item" href="/category/">South America</a>#}
-{#                        </div>#}
-{#                    </li>#}
+                    {#                    <li class="nav-item dropdown">#}
+                    {#                        <a class="nav-link dropdown-toggle" href="/category/" id="dropdown04" data-toggle="dropdown"#}
+                    {#                           aria-haspopup="true" aria-expanded="false">Travel</a>#}
+                    {#                        <div class="dropdown-menu" aria-labelledby="dropdown04">#}
+                    {#                            <a class="dropdown-item" href="/category/">Asia</a>#}
+                    {#                            <a class="dropdown-item" href="/category/">Europe</a>#}
+                    {#                            <a class="dropdown-item" href="/category/">Dubai</a>#}
+                    {#                            <a class="dropdown-item" href="/category/">Africa</a>#}
+                    {#                            <a class="dropdown-item" href="/category/">South America</a>#}
+                    {#                        </div>#}
+                    {#                    </li>#}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/category/" id="dropdown05" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Categories</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
                             {% for category in categories %}
-                            	<a class="dropdown-item" href="/category/?category={{ category.name }}">{{ category.name }}</a>
+                                <a class="dropdown-item"
+                                   href="/category/?category={{ category.name }}">{{ category.name }}</a>
                             {% endfor %}
                         </div>
                     </li>
@@ -157,46 +158,25 @@
                 <div class="row">
                     <div class="col-md-7">
                         <h3>Latest Post</h3>
-                        <div class="post-entry-sidebar">
-                            <ul>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_6.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018</span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {% for post in posts|slice:':3' %}
+                            <div class="post-entry-sidebar">
+                                <ul>
+                                    <li>
+                                        <a href>
+                                            <img src="{{ post.image.url }}" alt="Image placeholder"
+                                                 class="mr-4">
+                                            <div class="text">
+                                                <h4>{{ post.description|truncatechars:40 }}</h4>
+                                                <div class="post-meta">
+                                                    <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_3.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="{% static 'images/img_4.jpg' %}" alt="Image placeholder" class="mr-4">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-4">
