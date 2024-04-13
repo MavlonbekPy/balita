@@ -12,9 +12,20 @@ def base_view(request):
 
 
 def blog_search_view(request):
-    text = request.GET.get('text')
-    text = text.replace('+', ' ')
-    posts = Post.objects.filter(title__contains=text)
+    query = request.GET.get('text')
+    if query:
+        query = query.replace('+', ' ')
+        posts = Post.objects.filter(title__icontains=query)
+    else:
+        posts = Post.objects.all()
+
+    return render(request, 'index.html', {'posts': posts})
+
+
+# def blog_search_view(request):
+#     text = request.GET.get('text')
+#     text = text.replace('+', ' ')
+#     posts = Post.objects.filter(title__contains=text)
 
 
 def home_view(request):

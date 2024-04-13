@@ -84,9 +84,9 @@
                 </div>
                 <div class="col-3 search-top">
 
-                    <form action="/search/" class="search-top-form">
+                    <form action="{% url 'blog_search' %}" method="get" class="search-top-form">
                         <span class="icon fa fa-search"></span>
-                        <input type="text" id="s" placeholder="Type keyword to search...">
+                        <input type="text" name="text" id="s" placeholder="Type keyword to search...">
                     </form>
                 </div>
             </div>

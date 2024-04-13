@@ -8,5 +8,5 @@ urlpatterns = [
     path('contact/', contact_view),
     path('about/', about_view),
     path('blog/<int:pk>/', blog_single),
-    path('search/', blog_search_view)
+    path('blog_search/', blog_search_view, name="blog_search")
 ]
