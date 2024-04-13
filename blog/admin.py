@@ -7,11 +7,19 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'post', 'created_at', 'is_published')
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'created_at')
 
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Tag)
-admin.site.register(Comment)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(Comment, CommentAdmin)

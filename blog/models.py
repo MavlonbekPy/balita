@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.safestring import mark_safe
-# from ckeditor.fields import RichTextField
+from ckeditor.fields import RichTextField
 from config.basemodel import BaseModel
 
 
