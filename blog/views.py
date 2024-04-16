@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Category, Tag, Comment
 from django.core.paginator import Paginator
@@ -31,15 +32,20 @@ def blog_search_view(request):
 def home_view(request):
     info = request.GET
     page = info.get("page", 1)
-    posts = Post.objects.filter(is_published=True).order_by('-created_at')
-    post_obj = Paginator(posts, 3)
-    # posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by('-created_at')
+    post_obj = Paginator(posts, 4)
     categories = Category.objects.all()
+    count = categories.count()
     tags = Tag.objects.all()
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
+
     context = {
         'posts': post_obj.page(page),
         'categories': categories,
-        'tags': tags
+        'tags': tags,
+        'popular_posts': popular_posts,
+        'count': count,
     }
     return render(request, 'index.html', context=context)
 
@@ -48,7 +54,8 @@ def category_view(request):
     info = request.GET
     page = info.get("page", 1)
     cate = request.GET.get('category')
-    posts = Post.objects.filter(is_published=True, category__name=cate).order_by('-created_at')
+    posts = Post.objects.filter(is_published=True, category__name=cate).annotate(
+        num_comments=Count('comment')).order_by('-created_at')
     posts_obj = Paginator(posts, 2)
     tags = Tag.objects.all()
     categories = Category.objects.all()
@@ -94,7 +101,6 @@ def blog_single(request, pk):
         comment.save()
         return redirect(f'/blog/{pk}/')
 
-    # posts = Post.objects.filter(is_published=True, pk=pk)
     posts = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post_id=pk)
 
@@ -104,6 +110,6 @@ def blog_single(request, pk):
         'posts': posts,
         'tags': tags,
         'categories': categories,
-        'comments': comments
+        'comments': comments,
     }
     return render(request, 'blog-single.html', context=d)

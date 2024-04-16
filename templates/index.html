@@ -14,7 +14,7 @@
             <div class="row blog-entries">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="row">
-                        {% for post in posts|slice:':4' %}
+                        {% for post in posts%}
                             <div class="col-md-6">
                                 <a href="/blog/{{ post.id }}/" class="blog-entry element-animate"
                                    data-animate-effect="fadeIn">
@@ -23,7 +23,7 @@
                                         <div class="post-meta">
                                             <span class="category">{{ post.category.name }}</span>
                                             <span class="mr-2">{{ post.created_at }}</span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                            <span class="ml-2"><span class="fa fa-comments"></span> {{ post.num_comments }}</span>
                                         </div>
                                         <h2>{{ post.description }}</h2>
                                     </div>
@@ -73,7 +73,7 @@
                                         <div class="post-meta">
                                             <span class="category">Travel</span>
                                             <span class="mr-2">{{ post.created_at }}</span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                            <span class="ml-2"><span class="fa fa-comments"></span>{{ post.num_comments }}</span>
                                         </div>
                                         <h2>{{ post.description }}</h2>
                                     </span>
@@ -117,24 +117,26 @@
 
                     <div class="sidebar-box">
                         <h3 class="heading">Popular Posts</h3>
-                        {% for post in posts %}
+                        {% for post in popular_posts %}
                             <div class="post-entry-sidebar">
                                 <ul>
                                     <li>
-                                        <a href="/blog/{{ post.id }}/">
+                                        <a href="{% url 'blog-single' post.id %}">
                                             <img src="{{ post.image.url }}" alt="Image placeholder"
                                                  class="mr-4">
                                             <div class="text">
                                                 <h4>{{ post.description|truncatechars:40 }}</h4>
                                                 <div class="post-meta">
                                                     <span class="mr-2">{{ post.created_at }} </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                    <span class="ml-2"><span class="fa fa-comments"> </span>{{ post.num_comments }}</span>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
+                        {% empty %}
+                            <p>No popular posts available.</p>
                         {% endfor %}
                     </div>
                     <h3 class="heading">Categories</h3>
@@ -142,7 +144,7 @@
                         <div class="sidebar-box">
                             {% for category in categories %}
                                 <li>
-                                    <a href="/category/?category={{ category }}">{{ category.name }}<span>{{ category.id }}</span></a>
+                                    <a href="/category/?category={{ category }}">{{ category.name }}<span></span></a>
                                 </li>
                             {% endfor %}
                         </div>
