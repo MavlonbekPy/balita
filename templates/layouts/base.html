@@ -158,26 +158,26 @@
                 <div class="row">
                     <div class="col-md-7">
                         <h3>Latest Post</h3>
-{#                        <div class="post-entry-sidebar">#}
-{#                            {% for post in posts|slice:":4" %}#}
-{#                                <ul>#}
-{#                                    <li>#}
-{#                                        <a href>#}
-{#                                            <img src="{{ post.image.url }}" alt="Image placeholder"#}
-{#                                                 class="mr-4">#}
-{#                                            <div class="text">#}
-{#                                                <h4>{{ post.description|truncatechars:40 }}</h4>#}
-{#                                                <div class="post-meta">#}
-{#                                                    <span class="mr-2">{{ post.created_at }}</span>#}
-{#                                                    <span class="ml-2"><span#}
-{#                                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                        </a>#}
-{#                                    </li>#}
-{#                                </ul>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
+                        <div class="post-entry-sidebar">
+                            {% for post in recent_posts|slice:":4" %}
+                                <ul>
+                                    <li>
+                                        <a href="/blog/{{ post.id }}/">
+                                            <img src="{{ post.image.url }}" alt="Image placeholder"
+                                                 class="mr-4">
+                                            <div class="text">
+                                                <h4>{{ post.description|truncatechars:40 }}</h4>
+                                                <div class="post-meta">
+                                                    <span class="mr-2">{{ post.created_at }}</span>
+                                                    <span class="ml-2"><span
+                                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-4">

@@ -7,10 +7,13 @@ import requests
 
 def base_view(request):
     posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by('-created_at')
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
     categories = Category.objects.all()
     context = {
         'categories': categories,
-        'posts': posts
+        'posts': posts,
+        'recent_posts': recent_posts
     }
     return render(request, 'layouts/base.html', context=context)
 
@@ -129,12 +132,15 @@ def contact_view(request):
 
     posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment'))
     popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
-        '-num_comments')[:3]
+        '-num_comments')[:4]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
     categories = Category.objects.all()
     context = {
         'posts': posts,
         'categories': categories,
-        'popular_posts': popular_posts
+        'popular_posts': popular_posts,
+        'recent_posts': recent_posts
     }
 
     return render(request, 'contact.html', context=context)
