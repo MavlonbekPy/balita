@@ -103,6 +103,8 @@ def blog_single(request, pk):
 
     posts = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post_id=pk)
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
 
     categories = Category.objects.all()
     tags = Tag.objects.all()
@@ -111,5 +113,6 @@ def blog_single(request, pk):
         'tags': tags,
         'categories': categories,
         'comments': comments,
+        'popular_posts': popular_posts
     }
     return render(request, 'blog-single.html', context=d)
