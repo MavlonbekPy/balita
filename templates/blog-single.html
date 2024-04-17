@@ -10,7 +10,7 @@
                     <div class="post-meta">
                         <span class="category">{{ posts.category }}</span>
                         <span class="mr-2">{{ posts.created_at }}</span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {#                        <span class="ml-2"><span class="fa fa-comments"></span>{{ post.num_comments }}</span>#}
                     </div>
                     <div class="post-content-body">
                         <p>{{ posts.description }}</p>
@@ -28,8 +28,10 @@
                         <p>{{ posts.description }}</p>
                     </div>
                     <div class="pt-5">
-                        <p>Categories: <a href="#">Food</a>, <a href="#">Travel</a> Tags: <a href="#">#manila</a>, <a
-                                href="#">#asia</a></p>
+                        {#                        {% for category in categories %}#}
+                        {#                            <p>Categories: <a href="/category/?category={{ category.name }}">{{ category.name }}</a>,#}
+                        {#                            <a href="/category/?category={{ category.name }}">{{ categories.name }}</a>#}
+                        {#                        {% endfor %}#}
                     </div>
                     <div class="pt-5">
                         <h3 class="mb-5"></h3>
@@ -87,19 +89,16 @@
 
                     <div class="sidebar-box">
                         <div class="bio text-center">
-                            <img src="{% static 'images/person_1.jpg' %}" alt="Image Placeholder" class="img-fluid">
+                            <img src="{% static 'images/person_4.jpg' %}" alt="Image Placeholder" class="img-fluid">
                             <div class="bio-body">
-                                <h2>Meagan Smith</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt
-                                    repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit
-                                    molestias
-                                    minus.</p>
-                                <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
+                                <h2>Eraliyev Mavlon</h2>
+                                <p>I'm Senior Developer</p>
+                                <p><a href="/about/" class="btn btn-primary btn-sm">Read my bio</a></p>
                                 <p class="social">
-                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+{#                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>#}
+{#                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>#}
+{#                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>#}
+{#                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>#}
                                 </p>
                             </div>
                         </div>
@@ -133,23 +132,25 @@
                         <h3 class="heading">Categories</h3>
                         <ul class="categories">
                             {% for category in categories %}
-                                <li><a href="#">{{ category.name }}<span>#TODO</span></a></li>
+                                <li>
+                                    <a href="/category/?category={{ category.name }}">{{ category.name }}<span>#TODO</span></a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
 
-                    <div class="sidebar-box">
-                        <h3 class="heading">Tags</h3>
-                        <ul class="tags">
-                            {% for tag in tags %}
-                                <li><a href="#">{{ tag.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {#                    <div class="sidebar-box">#}
+                    {#                        <h3 class="heading">Tags</h3>#}
+                    {#                        <ul class="tags">#}
+                    {#                            {% for tag in tags %}#}
+                    {#                                <li><a href="#">{{ tag.name }}</a></li>#}
+                    {#                            {% endfor %}#}
+                    {#                        </ul>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+
                 </div>
-
             </div>
-        </div>
     </section>
     <section class="py-5">
         <div class="container">
@@ -159,45 +160,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <a href="#" class="a-block d-flex align-items-center height-md"
-                       style="background-image: url('{% static 'images/img_2.jpg' %}'); ">
-                        <div class=" text">
-                            <div class="post-meta">
-                                <span class="category">Lifestyle</span>
-                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                {% for post in popular_posts %}
+                    <div class="col-md-6 col-lg-4">
+                        <a href="/blog/{{ post.id }}/" class="a-block d-flex align-items-center height-md"
+                           style="background-image: url('{{ post.image.url }}'); ">
+                            <div class=" text">
+                                <div class="post-meta">
+                                    <span class="category"
+                                          href="/category/?category={{ category }}">{{ post.category }}</span>
+                                    <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                                    <span class="ml-2"><span
+                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>
+                                </div>
+                                <h3>{{ post.description|truncatechars:40 }}</h3>
                             </div>
-                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a href="#" class="a-block d-flex align-items-center height-md"
-                       style="background-image: url('{% static 'images/img_3.jpg' %}'); ">
-                        <div class="text">
-                            <div class="post-meta">
-                                <span class="category">Travel</span>
-                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                            </div>
-                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a href="#" class="a-block d-flex align-items-center height-md"
-                       style="background-image: url('{% static 'images/img_4.jpg' %}'); ">
-                        <div class="text">
-                            <div class="post-meta">
-                                <span class="category">Food</span>
-                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                            </div>
-                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </section>

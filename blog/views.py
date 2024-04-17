@@ -1,13 +1,16 @@
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Category, Tag, Comment
+from .models import Post, Category, Tag, Comment, Contact
 from django.core.paginator import Paginator
+import requests
 
 
 def base_view(request):
+    posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by('-created_at')
     categories = Category.objects.all()
     context = {
-        'categories': categories
+        'categories': categories,
+        'posts': posts
     }
     return render(request, 'layouts/base.html', context=context)
 
@@ -69,12 +72,15 @@ def category_view(request):
 
 def about_view(request):
     tags = Tag.objects.all()
-    posts = Post.objects.filter(is_published=True).order_by('-created_at')
+    posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by('-created_at')
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
     categories = Category.objects.all()
     context = {
         'categories': categories,
         'posts': posts,
         'tags': tags,
+        'popular_posts': popular_posts
     }
     return render(request, 'about.html', context=context)
 
@@ -88,8 +94,33 @@ def blog_view(request):
 
 
 def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+
+        contact = Contact.objects.create(name=name, email=email, phone=phone, message=message)
+
+        token = "6749312297:AAHVOEH5pugcBZZt3aRaXwf8YgflvnQO6vg"
+        chat_id = "5210463524"
+        message_text = f"From Balita:\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
+        telegram_url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={message_text}"
+        requests.get(telegram_url)
+
+        return redirect('/contact/')
+
+    posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment'))
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
     categories = Category.objects.all()
-    return render(request, 'contact.html', context={'categories': categories})
+    context = {
+        'posts': posts,
+        'categories': categories,
+        'popular_posts': popular_posts
+    }
+
+    return render(request, 'contact.html', context=context)
 
 
 def blog_single(request, pk):
@@ -113,6 +144,7 @@ def blog_single(request, pk):
         'tags': tags,
         'categories': categories,
         'comments': comments,
-        'popular_posts': popular_posts
+        'popular_posts': popular_posts,
+        'contact': 'active'
     }
     return render(request, 'blog-single.html', context=d)

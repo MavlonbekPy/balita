@@ -156,48 +156,44 @@
             </div>
             <div class="col-md-6 ml-auto">
                 <div class="row">
-                        <div class="col-md-7">
-                            <h3>Latest Post</h3>
-                            <div class="post-entry-sidebar">
-                                <ul>
-                                    <li>
-                                        <a href>
-                                            <img src="{{ post.image.url }}" alt="Image placeholder"
-                                                 class="mr-4">
-                                            <div class="text">
-                                                <h4>{{ post.description|truncatechars:40 }}</h4>
-                                                <div class="post-meta">
-                                                    <span class="mr-2">{{ post.created_at }}</span>
-                                                    <span class="ml-2"><span
-                                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-md-7">
+                        <h3>Latest Post</h3>
+{#                        <div class="post-entry-sidebar">#}
+{#                            {% for post in posts|slice:":4" %}#}
+{#                                <ul>#}
+{#                                    <li>#}
+{#                                        <a href>#}
+{#                                            <img src="{{ post.image.url }}" alt="Image placeholder"#}
+{#                                                 class="mr-4">#}
+{#                                            <div class="text">#}
+{#                                                <h4>{{ post.description|truncatechars:40 }}</h4>#}
+{#                                                <div class="post-meta">#}
+{#                                                    <span class="mr-2">{{ post.created_at }}</span>#}
+{#                                                    <span class="ml-2"><span#}
+{#                                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+                    </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-4">
                         <div class="mb-5">
-                            <h3>Quick Links</h3>
+                            <h3>Categories: </h3>
                             <ul class="list-unstyled">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Travel</a></li>
-                                <li><a href="#">Adventure</a></li>
-                                <li><a href="#">Courses</a></li>
-                                <li><a href="#">Categories</a></li>
+                                {% for category in categories %}
+                                    <li><a href="/category/?category={{ category }}">{{ category.name }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="mb-5">
                             <h3>Social</h3>
                             <ul class="list-unstyled footer-social">
-                                <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                                <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                                <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                                <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>
-                                <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                                <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>
+                                <li><a href="https://twitter.com/mavloncv"><span class="fa fa-twitter"></span> Twitter</a></li>
+                                <li><a href="https://www.instagram.com/___mavlon/"><span class="fa fa-instagram"></span> Instagram</a></li>
                             </ul>
                         </div>
                     </div>
@@ -207,9 +203,9 @@
         <div class="row">
             <div class="col-md-12">
 
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                    href="https://colorlib.com/" target="_blank">Colorlib</a>
+                {#                Copyright &copy;<script>document.write(new Date().getFullYear());</script>#}
+                {#                All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a#}
+                {#                    href="https://colorlib.com/" target="_blank">Colorlib</a>#}
 
             </div>
         </div>

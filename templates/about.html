@@ -7,25 +7,26 @@
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 class="mb-4">Hi There! I'm Meagan Smith</h2>
-                            <p class="mb-5"><img src="{% static 'images/img_6.jpg' %}" alt="Image placeholder"
+                            <h2 class="mb-4">This is My Car</h2>
+                            <p class="mb-5"><img src="{% static 'images/2024-the-techart-gtstreet-r-touring-ys.jpg' %}"
+                                                 alt="Image placeholder"
                                                  class="img-fluid"></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum minima eveniet recusandae
-                                suscipit eum laboriosam fugit amet deleniti iste et. Ad dolores, necessitatibus non
-                                saepe tenetur impedit commodi quibusdam natus repellat, exercitationem accusantium
-                                perferendis officiis. Laboriosam impedit quia minus pariatur!</p>
-                            <p>Dignissimos iste consectetur, nemo magnam nulla suscipit eius quibusdam, quo aperiam quia
-                                quae est explicabo nostrum ab aliquid vitae obcaecati tenetur beatae animi fugiat
-                                officia id ipsam sint? Obcaecati ea nisi fugit assumenda error totam molestiae saepe
-                                fugiat officiis quam?</p>
-                            <p>Culpa porro quod doloribus dolore sint. Distinctio facilis ullam voluptas nemo voluptatum
-                                saepe repudiandae adipisci officiis, explicabo eaque itaque sed necessitatibus, fuga, ea
-                                eius et aliquam dignissimos repellendus impedit pariatur voluptates. Dicta perferendis
-                                assumenda, nihil placeat, illum quibusdam. Vel, incidunt?</p>
-                            <p>Dolorum blanditiis illum quo quaerat, possimus praesentium perferendis! Quod autem optio
-                                nobis, placeat officiis dolorem praesentium odit. Vel, cum, a. Adipisci eligendi eaque
-                                laudantium dicta tenetur quod, pariatur sunt sed natus officia fuga accusamus
-                                reprehenderit ratione, provident possimus ut voluptatum.</p>
+                            <p>The Porsche 911 (pronounced Nine Eleven or in German: Neunelf) is a two-door 2+2 high
+                                performance rear-engined sports car introduced in September 1964 by Porsche AG of
+                                Stuttgart, Germany. It has a rear-mounted flat-six engine and originally a torsion bar
+                                suspension. The car has been continuously enhanced through the years but the basic
+                                concept has remained unchanged.[1] The engines were air-cooled until the introduction of
+                                the 996 series in 1998.</p>
+                            <p>The 911 has been raced extensively by private and factory teams, in a variety of classes.
+                                It is among the most successful competition cars. In the mid-1970s, the naturally
+                                aspirated 911 Carrera RSR won world championship races including Targa Florio and the 24
+                                Hours of Daytona. The 911-derived 935 turbo also won the 24 Hours of Le Mans in 1979.
+                                Porsche won the World Championship for Makes in 1976, 1977, 1978, and 1979 with
+                                911-derived models.</p>
+                            <p>In a 1999 poll to determine the Car of the Century, the 911 was fifth.[4] It is one of
+                                two in the top five that had remained continuously in production (the original Beetle
+                                remained in production until 2003).[5] The one millionth example was manufactured in May
+                                2017 and is in the company's permanent collection.</p>
                         </div>
                     </div>
                     <div class="row mb-5 mt-5">
@@ -42,7 +43,8 @@
                                         <div class="post-meta">
                                             <span class="category">Travel</span>
                                             <span class="mr-2">{{ post.created_at }}</span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                            <span class="ml-2"><span
+                                                    class="fa fa-comments"></span>{{ post.num_comments }}</span>
                                         </div>
                                         <h2>{{ post.description }}</h2>
                                     </span>
@@ -54,14 +56,14 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
 
-                            <nav aria-label="Page navigation" class="text-center">
-                                <ul class="pagination">
-                                    <li class="page-item  active"><a class="page-link" href="#">Prev</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
+                            {#                            <nav aria-label="Page navigation" class="text-center">#}
+                            {#                                <ul class="pagination">#}
+                            {#                                    <li class="page-item  active"><a class="page-link" href="#">Prev</a></li>#}
+                            {#                                    <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+                            {#                                    <li class="page-item"><a class="page-link" href="#">2</a></li>#}
+                            {#                                    <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+                            {#                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>#}
+                            {#                                </ul>#}
 
                             </nav>
                         </div>
@@ -81,26 +83,25 @@
 
                     <div class="sidebar-box">
                         <div class="bio text-center">
-                            <img src="{% static 'images/person_1.jpg' %}" alt="Image Placeholder" class="img-fluid">
+                            <img src="{% static 'images/person_4.jpg' %}" alt="Image Placeholder" class="img-fluid">
                             <div class="bio-body">
-                                <h2>Meagan Smith</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt
-                                    repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit
-                                    molestias minus.</p>
-                                <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
+                                <h2>Eraliyev Mavlon</h2>
+                                <p>I'm Senior Developer</p>
+                                <p><a href="/about/" class="btn btn-primary btn-sm">Read my bio</a></p>
                                 <p class="social">
-                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+                                    {#                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>#}
+                                    {#                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>#}
+                                    {#                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>#}
+                                    {#                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>#}
                                 </p>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="sidebar-box">
                         <h3 class="heading">Popular Posts</h3>
-                        {% for post in posts|slice:":3" %}
+                        {% for post in popular_posts %}
                             <div class="post-entry-sidebar">
                                 <ul>
                                     <li>
@@ -111,7 +112,8 @@
                                                 <h4>{{ post.description|truncatechars:40 }}</h4>
                                                 <div class="post-meta">
                                                     <span class="mr-2">{{ post.created_at }} </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                    <span class="ml-2"><span
+                                                            class="fa fa-comments"></span>{{ post.num_comments }}</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -126,19 +128,19 @@
                         <div class="sidebar-box">
                             {% for category in categories %}
                                 <li>
-                                    <a href="/category/?category={{ category }}">{{ category.name }}<span>{{ category.id }}</span></a>
+                                    <a href="/category/?category={{ category }}">{{ category.name }}<span>#TODO</span></a>
                                 </li>
                             {% endfor %}
                         </div>
                     </ul>
-                    <div class="sidebar-box">
-                        <h3 class="heading">Tags</h3>
-                        <ul class="tags">
-                            {% for tag in tags %}
-                                <li><a href="/blog/{{ tag.id }}/">{{ tag.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {#                    <div class="sidebar-box">#}
+                    {#                        <h3 class="heading">Tags</h3>#}
+                    {#                        <ul class="tags">#}
+                    {#                            {% for tag in tags %}#}
+                    {#                                <li><a href="/blog/{{ tag.id }}/">{{ tag.name }}</a></li>#}
+                    {#                            {% endfor %}#}
+                    {#                        </ul>#}
+                    {#                    </div>#}
                 </div>
             </div>
 
