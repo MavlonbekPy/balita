@@ -34,7 +34,7 @@
                             <h2>My Latest Posts</h2>
                         </div>
                         <div class="col-md-12">
-                            {% for post in posts|slice:':3' %}
+                            {% for post in recent_posts|slice:':3' %}
                                 <div class="post-entry-horzontal">
                                     <a href="#">
                                         <div class="image element-animate" data-animate-effect="fadeIn"

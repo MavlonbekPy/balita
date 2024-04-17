@@ -97,7 +97,7 @@
 
                     <div class="sidebar-box">
                         <h3 class="heading">Popular Posts</h3>
-                        {% for post in posts %}
+                        {% for post in popular_posts %}
                             <div class="post-entry-sidebar">
                                 <ul>
                                     <li>
@@ -108,7 +108,7 @@
                                                 <h4>{{ post.description|truncatechars:30 }}</h4>
                                                 <div class="post-meta">
                                                     <span class="mr-2">{{ post.created_at }} </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                                    <span class="ml-2"><span class="fa fa-comments"></span>{{ post.num_comments }}</span>
                                                 </div>
                                             </div>
                                         </a>

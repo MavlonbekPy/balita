@@ -23,7 +23,12 @@ def blog_search_view(request):
     else:
         posts = Post.objects.all()
 
-    return render(request, 'index.html', {'posts': posts})
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
+
+    return render(request, 'index.html', {'posts': posts, 'popular_posts': popular_posts, 'recent_posts': recent_posts})
 
 
 # def blog_search_view(request):
@@ -42,6 +47,8 @@ def home_view(request):
     tags = Tag.objects.all()
     popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
         '-num_comments')[:3]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
 
     context = {
         'posts': post_obj.page(page),
@@ -49,6 +56,7 @@ def home_view(request):
         'tags': tags,
         'popular_posts': popular_posts,
         'count': count,
+        'recent_posts': recent_posts
     }
     return render(request, 'index.html', context=context)
 
@@ -59,13 +67,19 @@ def category_view(request):
     cate = request.GET.get('category')
     posts = Post.objects.filter(is_published=True, category__name=cate).annotate(
         num_comments=Count('comment')).order_by('-created_at')
+    popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-num_comments')[:3]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
     posts_obj = Paginator(posts, 2)
     tags = Tag.objects.all()
     categories = Category.objects.all()
     context = {
         'posts': posts_obj.page(page),
         'categories': categories,
-        'tag': tags
+        'tag': tags,
+        'recent_posts': recent_posts,
+        'popular_posts': popular_posts
     }
     return render(request, 'category.html', context=context)
 
@@ -75,12 +89,15 @@ def about_view(request):
     posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by('-created_at')
     popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
         '-num_comments')[:3]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:4]
     categories = Category.objects.all()
     context = {
         'categories': categories,
         'posts': posts,
         'tags': tags,
-        'popular_posts': popular_posts
+        'popular_posts': popular_posts,
+        'recent_posts': recent_posts
     }
     return render(request, 'about.html', context=context)
 
@@ -136,6 +153,8 @@ def blog_single(request, pk):
     comments = Comment.objects.filter(post_id=pk)
     popular_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
         '-num_comments')[:3]
+    recent_posts = Post.objects.filter(is_published=True).annotate(num_comments=Count('comment')).order_by(
+        '-created_at')[:3]
 
     categories = Category.objects.all()
     tags = Tag.objects.all()
@@ -145,6 +164,7 @@ def blog_single(request, pk):
         'categories': categories,
         'comments': comments,
         'popular_posts': popular_posts,
-        'contact': 'active'
+        'contact': 'active',
+        'recent_posts': recent_posts
     }
     return render(request, 'blog-single.html', context=d)
