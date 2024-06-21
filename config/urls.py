@@ -18,17 +18,17 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include
-from django.urls import re_path, path, include
-from django.views.static import serve
+# from django.urls import re_path, path, include
+# from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     re_path(r'^static/(?P<path>.*)$', serve),
-    re_path(
-            r'^media/(?P<path>.*)$', serve,
-            {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}
-        ),
+    # re_path(
+    #         r'^media/(?P<path>.*)$', serve,
+    #         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}
+    #     ),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
